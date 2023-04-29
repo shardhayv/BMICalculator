@@ -19,6 +19,7 @@ class _InputPageState extends State<InputPage> {
 
   int height = 180;
   int weight = 50;
+  int age = 20;
   // Color maleCardColour = cardColour;
   // Color femaleCardColour = cardColour;
 
@@ -166,45 +167,89 @@ class _InputPageState extends State<InputPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const RoundCustomButton(
-                              icon: Icons.add,
+                            RoundCustomButton(
+                              function: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
+                              icon: FontAwesomeIcons.minus,
                             ),
-                            // FloatingActionButton(
-                            //   backgroundColor: const Color(0xff7776A4),
-                            //   onPressed: () {},
-                            //   child: const Icon(
-                            //     Icons.add,
-                            //   ),
-                            // ),
                             const SizedBox(
-                              width: 10,
+                              width: 15,
                             ),
-                            FloatingActionButton(
-                              backgroundColor: const Color(0xff7776A4),
-                              onPressed: () {},
-                              child: const Icon(
-                                Icons.add,
-                              ),
-                            ),
+                            RoundCustomButton(
+                              function: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
+                              icon: FontAwesomeIcons.plus,
+                            )
                           ],
                         )
                       ],
                     ),
                   ),
                 ),
-                const Expanded(
+                Expanded(
                   child: ReusableCard(
                     colour: kCardColour,
+                    cardChild: Column(
+                      children: [
+                        const Text(
+                          'AGE',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: kNumberLabelStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundCustomButton(
+                              function: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                              icon: FontAwesomeIcons.minus,
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            RoundCustomButton(
+                              function: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                              icon: FontAwesomeIcons.plus,
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 10.0),
-            color: kBottomCOntainerColour,
-            width: double.infinity,
-            height: kBottomContainerHeight,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/results');
+            },
+            child: Container(
+              margin: const EdgeInsets.only(top: 10.0),
+              color: kBottomCOntainerColour,
+              width: double.infinity,
+              height: kBottomContainerHeight,
+              child: const Text(
+                'CALCULATE',
+                style: kNumberLabelStyle,
+              ),
+            ),
           )
         ],
       ),
@@ -213,18 +258,19 @@ class _InputPageState extends State<InputPage> {
 }
 
 class RoundCustomButton extends StatelessWidget {
-  const RoundCustomButton({super.key, this.icon});
+  RoundCustomButton({super.key, this.icon, required this.function});
 
   final IconData? icon;
+  void Function() function;
 
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
-      elevation: 6.0,
+      elevation: 0.0,
       constraints: const BoxConstraints.tightFor(width: 56.0, height: 56.0),
-      shape: const CircleBorder(),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       fillColor: const Color(0xff7776A4),
-      onPressed: () {},
+      onPressed: function,
       child: Icon(icon),
     );
   }
