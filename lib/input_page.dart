@@ -5,8 +5,8 @@ import 'card_view.dart';
 import 'icon_view.dart';
 
 const bottomContainerHeight = 80.0;
-const cardColour = Color(0xff1D1F33);
-const activeCardCOlour = Color.fromARGB(255, 22, 14, 14);
+const cardColour = Color.fromARGB(255, 37, 51, 210);
+const activeCardCOlour = Colors.yellow;
 const bottomCOntainerColour = Color(0xffEA1556);
 const iconColour = Color(0xffFFFFFF);
 const textColour = Color(0xffFFFFFF);
@@ -58,63 +58,65 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedGender = Gender.male;
-                      });
+                  child: ReusableCard(
+                    colour: selectedGender == Gender.male
+                        ? activeCardCOlour
+                        : cardColour,
+                    onPressed: () {
+                      setState(
+                        () {
+                          selectedGender == Gender.male;
+                          print('Male clicked');
+                        },
+                      );
                     },
-                    child: ReusableCard(
-                      cardChild: const CardData(
-                        textColour: iconColour,
-                        iconColour: textColour,
-                        iconName: FontAwesomeIcons.mars,
-                        label: 'MALE',
-                      ),
-                      colour: selectedGender == Gender.male
-                          ? activeCardCOlour
-                          : cardColour,
+                    cardChild: const CardData(
+                      textColour: iconColour,
+                      iconColour: textColour,
+                      iconName: FontAwesomeIcons.mars,
+                      label: 'MALE',
                     ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPressed: () {
                       setState(() {
-                        selectedGender = Gender.female;
+                        selectedGender == Gender.female;
                       });
                     },
-                    child: ReusableCard(
-                      cardChild: const CardData(
-                        textColour: iconColour,
-                        iconColour: textColour,
-                        iconName: FontAwesomeIcons.venus,
-                        label: 'FEMALE',
-                      ),
-                      colour: selectedGender == Gender.female
-                          ? activeCardCOlour
-                          : cardColour,
+                    colour: selectedGender == Gender.female
+                        ? activeCardCOlour
+                        : cardColour,
+                    cardChild: const CardData(
+                      textColour: iconColour,
+                      iconColour: textColour,
+                      iconName: FontAwesomeIcons.venus,
+                      label: 'FEMALE',
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             child: ReusableCard(
+              onPressed: () {},
               colour: cardColour,
             ),
           ),
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: ReusableCard(
+                    onPressed: () {},
                     colour: cardColour,
                   ),
                 ),
                 Expanded(
                   child: ReusableCard(
+                    onPressed: () {},
                     colour: cardColour,
                   ),
                 ),
