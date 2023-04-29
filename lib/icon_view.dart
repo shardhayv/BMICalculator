@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/cupertino.dart';
 
 class CardData extends StatelessWidget {
@@ -28,7 +29,7 @@ class CardData extends StatelessWidget {
         ),
         Text(
           label,
-          style: TextStyle(fontSize: 20, color: textColour),
+          style: kLabelTextStyle,
         ),
       ],
     );
