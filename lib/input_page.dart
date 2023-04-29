@@ -18,6 +18,7 @@ class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
 
   int height = 180;
+  int weight = 50;
   // Color maleCardColour = cardColour;
   // Color femaleCardColour = cardColour;
 
@@ -148,13 +149,50 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: ReusableCard(
                     colour: kCardColour,
+                    cardChild: Column(
+                      children: [
+                        const Text(
+                          'WEIGHT',
+                          style: kLabelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: kNumberLabelStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const RoundCustomButton(
+                              icon: Icons.add,
+                            ),
+                            // FloatingActionButton(
+                            //   backgroundColor: const Color(0xff7776A4),
+                            //   onPressed: () {},
+                            //   child: const Icon(
+                            //     Icons.add,
+                            //   ),
+                            // ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            FloatingActionButton(
+                              backgroundColor: const Color(0xff7776A4),
+                              onPressed: () {},
+                              child: const Icon(
+                                Icons.add,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: ReusableCard(
                     colour: kCardColour,
                   ),
@@ -170,6 +208,24 @@ class _InputPageState extends State<InputPage> {
           )
         ],
       ),
+    );
+  }
+}
+
+class RoundCustomButton extends StatelessWidget {
+  const RoundCustomButton({super.key, this.icon});
+
+  final IconData? icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      elevation: 6.0,
+      constraints: const BoxConstraints.tightFor(width: 56.0, height: 56.0),
+      shape: const CircleBorder(),
+      fillColor: const Color(0xff7776A4),
+      onPressed: () {},
+      child: Icon(icon),
     );
   }
 }
